@@ -1,9 +1,6 @@
 # Watcher (AutoHotkey v2)
 
-A small AutoHotkey v2 utility that watches another AHK script for runtime Warning/Error dialogs and writes details to a log. This repo contains two variants:
-
-- `Watcher.ahk` (current, UI watcher): does not run the target; it monitors windows, logs errors, and offers a tray UI.
-- `Watcher - Copy.ahk` (full runner): launches the target with `/ErrorStdOut`, mirrors stderr, supports headless/timeout/signal re-run. Use this when you need an automated runner.
+A small AutoHotkey v2 utility that watches another AHK script for runtime Warning/Error dialogs and writes details to a log. 
 
 ## Requirements
 
@@ -47,14 +44,6 @@ A small AutoHotkey v2 utility that watches another AHK script for runtime Warnin
 - Generic UI heuristics are used to detect AHK dialogs (common button labels + title/content checks). Normal app MsgBoxes are usually ignored unless they resemble AHK error/warning text.
 - The UI no longer shows the last message textbox; all details go to the logs.
 
-## Full Runner Variant (optional)
-
-Use `Watcher - Copy.ahk` when you also want the watcher to run your script, capture `/ErrorStdOut`, and support automation.
-
-- Example: `"C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey64.exe" "Watcher - Copy.ahk" --headless --script="C:\\path\\to\\target.ahk" --timeout=20`
-- Notable flags (runner variant): `--script=PATH`, `--headless/--once`, `--timeout=SEC`, `--bring-dialog`, `--stop-on-error`, optional re-run signal file.
-- Runner variant may maintain `stderr.log` and write a `summary.txt`. See comments in that script for the full list of options.
-
 ## Troubleshooting
 
 - No `error.log` appears: ensure the target actually raised an AHK error/warning dialog; or try the runner variant for `/ErrorStdOut` capture.
@@ -66,4 +55,3 @@ Use `Watcher - Copy.ahk` when you also want the watcher to run your script, capt
 - Code style: pure AutoHotkey v2 (expression syntax, functions, `Gui()` API, `try/catch`).
 - Logging helpers: `LogDebug()` (temp debug log) and `_AppendLog()` (target `error.log`, overwrite mode).
 - High-risk calls are wrapped in `try/catch`; update or add logs as needed when extending the watcher.
-
